@@ -75,3 +75,15 @@ def find_by_template(db_schema, table_name, template, field_list):
 
     return res
 
+def find_by_prefix(db_schema, table_name, prefix):
+
+    conn = _get_db_connection()
+    cur = conn.cursor()
+
+    sql = "select * from " + db_schema + "." + table_name + " " + "where name like '" + prefix + "" + "%'"
+    res = cur.execute(sql)
+    res = cur.fetchall()
+
+    conn.close()
+
+    return res
